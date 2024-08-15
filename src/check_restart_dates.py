@@ -13,7 +13,7 @@ xhistfile = os.path.join(DATAM,'%s.xhist'%RUNID)
 
 xhist_date = ''
 nml = f90nml.read(xhistfile)
-checkpoint_dump_im = os.path.basename(nml['nlchistg']['checkpoint_dump_im'][0])
+checkpoint_dump_im = os.path.basename(nml['nlchistg']['checkpoint_dump_im'])
 match = re.search(r"\S*da(\d{8})", checkpoint_dump_im)
 if match:
     xhist_date = match.group(1)

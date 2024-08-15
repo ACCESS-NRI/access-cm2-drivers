@@ -13,7 +13,7 @@ nml = f90nml.read(sys.argv[1])
 # Remove the &NLSTCALL_PP_HIST sections
 del nml['nlstcall_pp_hist']
 
-nml['nlchistg']['checkpoint_dump_im'][0] = os.path.join(DATAM, "%sa.da%s_00" % (RUNID, WARM_RESTART_DATE))
+nml['nlchistg']['checkpoint_dump_im'] = os.path.join(DATAM, "%sa.da%s_00" % (RUNID, WARM_RESTART_DATE))
 
 nml['nlcfiles']['astart'] = os.path.join(ROSE_DATA, "%s.astart" % RUNID)
 
