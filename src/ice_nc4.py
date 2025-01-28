@@ -36,7 +36,7 @@ if monthly:
         cmd = ["nccopy", "-k3", "-d4", f, f"iceh_m{f[4:]}"]
         if verbose:
             print(cmd)
-        subprocess.check_call(cmd, stderr=subprocess.STDOUT)
+        subprocess.run(cmd, check=True)
 else:
     print("No monthly data to process.")
 
@@ -58,7 +58,7 @@ if daily:
             cmd = ["ncrcat", "-4", "--deflate", "4", *files, f"iceh_d.{year}-{month}.nc"]
             if verbose:
                 print(cmd)
-            subprocess.check_call(cmd, stderr=subprocess.STDOUT)
+            subprocess.run(cmd, check=True)
         else:
             day = included_list.index(False)+1
             raise Exception(f"Missing daily data 'iceh.{year}-{month}-{day:02d}.nc'.")
