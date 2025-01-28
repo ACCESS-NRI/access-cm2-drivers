@@ -53,12 +53,14 @@ if daily:
     for (year, month), files in grouped.items():
         days_in_month = monthrange(int(year), int(month))[1]
         available_days = [int(f[-5:-3]) for f in files]
-        if all(day in available_days for day in range(1, days_in_month + 1)):
+        included_list = [day in available_days for day in range(1, days_in_month + 1)]
+        if all(included_list):
             cmd = ["ncrcat", "-4", "--deflate", "4", *files, f"iceh_d.{year}-{month}.nc"]
             if verbose:
                 print(cmd)
             subprocess.check_call(cmd, stderr=subprocess.STDOUT)
         else:
-            raise Exception(f"Missing daily data for {year}-{month}. Available files: {files}")
+            day = included_list.index(False)+1
+            raise Exception(f"Missing daily data 'iceh.{year}-{month}-{day}'.")
 else:
     print("No daily data to process.")
