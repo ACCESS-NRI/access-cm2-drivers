@@ -61,6 +61,6 @@ if daily:
             subprocess.check_call(cmd, stderr=subprocess.STDOUT)
         else:
             day = included_list.index(False)+1
-            raise Exception(f"Missing daily data 'iceh.{year}-{month}-{day}'.")
+            raise Exception(f"Missing daily data 'iceh.{year}-{month}-{day:02d}.nc'.")
 else:
     print("No daily data to process.")
