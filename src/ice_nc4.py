@@ -2,13 +2,17 @@
 
 # Convert CICE history to netCDF4 and combine separate daily files
 # into a single monthly file.
+# This script assumes a proleptic Gregorian calendar.
 
 # Note that adding shuffle actually increases the size of the
 # monthly files.
 
 # Should be run in the CICE history output directory
 
-import os, glob, re, subprocess, warnings
+import glob
+import re
+import subprocess
+import warnings
 from collections import defaultdict
 from calendar import monthrange
 
@@ -51,7 +55,7 @@ if daily:
     
     # Combine data if all days are present for each year-month group
     for (year, month), files in grouped.items():
-        days_in_month = monthrange(int(year), int(month))[1]
+        days_in_month = monthrange(int(year), int(month))[1] # Assuming a proleptic Gregorian calendar
         available_days = [int(f[-5:-3]) for f in files]
         included_list = [day in available_days for day in range(1, days_in_month + 1)]
         if all(included_list):
