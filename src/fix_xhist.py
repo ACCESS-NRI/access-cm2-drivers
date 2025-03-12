@@ -7,7 +7,8 @@ DATAM = os.environ['DATAM']
 nml = f90nml.read(sys.argv[1])
 
 # Remove the &NLSTCALL_PP_HIST sections
-del nml['nlstcall_pp_hist']
+if 'nlstcall_pp_hist' in nml:
+    del nml['nlstcall_pp_hist']
 
 checkpoint_dump_im = nml['nlchistg']['checkpoint_dump_im'][0]
 nml['nlchistg']['checkpoint_dump_im'][0] = os.path.join(DATAM, os.path.basename(checkpoint_dump_im))
