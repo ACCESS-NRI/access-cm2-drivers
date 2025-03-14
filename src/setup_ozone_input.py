@@ -118,7 +118,8 @@ level_height_bounds.shape = (85,2)
 level_height = iris.coords.AuxCoord.from_coord(rho.coord('atmosphere_hybrid_height_coordinate'))
 level_height.var_name = 'rho_level_height'
 level_height.standard_name = 'atmosphere_hybrid_height_coordinate'
-del level_height.attributes['comments']
+if 'comments' in level_height.attributes:
+    del level_height.attributes['comments']
 level_height.long_name = 'level_height'
 level_height.bounds = level_height_bounds
 vertical_dim = rho.coord_dims('atmosphere_hybrid_height_coordinate')
