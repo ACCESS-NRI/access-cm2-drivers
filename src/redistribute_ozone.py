@@ -20,8 +20,7 @@ Note that a netCDF will be created alongside the ancillary.
 import argparse
 import numpy as np
 
-import ants
-import ants.io.save as save
+from ants.io import save
 import iris
 import iris.analysis.cartography
 import iris.coord_categorisation as coord_cat
