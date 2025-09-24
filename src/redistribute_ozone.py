@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Module to redistribute ozone for dynamic tropopause.
 
@@ -21,6 +21,7 @@ import argparse
 import numpy as np
 
 import ants
+import ants.io.save as save
 import iris
 import iris.analysis.cartography
 import iris.coord_categorisation as coord_cat
@@ -454,7 +455,7 @@ def process(args):
     # ** Write oz to new ancillary **
     if oz.coord('time').bounds is None:
         oz.coord('time').guess_bounds()
-    ants.save(oz, args.output, saver='ancil')
+    save.ancil(oz, args.output)
 
     # ** Transfer this ancillary to HPC **
     # ** Store this ancillary on MASS **
